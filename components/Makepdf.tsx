@@ -1,6 +1,7 @@
 import React, {useRef, useState, useEffect} from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { push } from "@socialgouv/matomo-next";
 import Layout, { siteTitle } from '../components/layout'
 
 import ReactToPdf from "react-to-pdf";
@@ -37,14 +38,28 @@ export const Makepdf = ({
         <button
           className="px-4 py-2 font-bold text-white bg-indigo-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
           // type="submit"
-          onClick={toPdf}
+          onClick={() => {
+            push(["trackEvent", "Action:click:button:pdf", JSON.stringify({
+              "name": "Get PDF report",
+              "ts": Date.now(),
+              "data": {
+                pay,
+                headCount,
+                headCountExtend,
+                monthlyIncome,
+                monthlyExpense,
+              }
+            })]);
+
+            toPdf();
+          }}
         >
           Get the report in PDF
         </button>
       )}
     </ReactToPdf>
     
-    <div className="PdfContainer my-4 h-0 overflow-hidden">
+    <div className="PdfContainer my-4 h-auto overflow-hidden">
       <div
         className=""
         style={{
@@ -59,7 +74,15 @@ export const Makepdf = ({
           }}
           ref={ref as React.RefObject<HTMLDivElement>}
         >
-          <Image width={160} height={160} src="/default-thumb.png" loader={myLoader} alt="logo" />
+          <Image
+            width={160}
+            height={160}
+            src="/default-thumb.png"
+            loader={myLoader}
+            alt="logo"
+            // unoptimized={true}
+            // loading="eager"
+          />
           <h1 style={{"fontSize": "56pt"}}>{siteTitle}</h1>
           <p className="">Have to pay</p>
           <p className="mb-6 text-2xl">USD$ {pay} per month.</p>

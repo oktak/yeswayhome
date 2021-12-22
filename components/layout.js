@@ -54,6 +54,8 @@ export default function Layout({ children, home }) {
             React.Children.map(children, child => React.cloneElement(child, { "data-navbaropen": navbarOpen }))
           }
         </div>
+
+        <noscript dangerouslySetInnerHTML={{__html: `<img src="https://ga.miinikiao.ga/ga/matomo.php?idsite=2&amp;rec=1" alt="" height="0" width="0" style="display:none;visibility:hidden;" />`}} />
       </div>
     </div>
   )

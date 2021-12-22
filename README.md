@@ -22,3 +22,6 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 - [Tutorial](https://nextjs.org/learn/basics/dynamic-routes/dynamic-routes-details)
 - [Next export (SSG)](https://github.com/vercel/next.js/issues/18356)
+- [Tracking using Matomo](https://www.npmjs.com/package/@socialgouv/matomo-next)
+- [Unoptimized Image in Next.js](https://uploadcare.com/blog/next-js-image-optimization/)
+- [Tracking image/script: use dangerouslySetInnerHTML](https://lifesaver.codes/answer/adding-ga-script-tag)
